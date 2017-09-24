@@ -13,7 +13,8 @@ public class Main
     
     public static void main(String [] args) {
         File[] tvShows = new File(SHOW_FOLDER).listFiles();
-        String torrentQuality = "1080p";
+        String defaultTorrentQuality = "1080p"; //your default resolution preference
+        String fallbackTorrentQuality = "720p"; //your fallback resolution preference
         TrayIconDemo notify = new TrayIconDemo();
         
         Torrent torrent = new Torrent();
@@ -60,20 +61,21 @@ public class Main
                 int tries = 0;
                 
                 while (searchResult == null) {
-                    if (tries == 0) phrase = String.format("%s S%02dE%02d %s", showName, nextSeasonNo, nextEpisodeNo, torrentQuality);
-                    if (tries == 1 || tries == 3 || tries == 5) {
-                        torrentQuality = "720p";
-                        phrase = String.format("%s S%02dE%02d %s", showName, nextSeasonNo, nextEpisodeNo, torrentQuality);
+                    if (tries == 0) phrase = String.format("%s S%02dE%02d %s", showName, nextSeasonNo, nextEpisodeNo, defaultTorrentQuality);
+                    if (tries == 1 || tries == 3) {
+                        phrase = String.format("%s S%02dE%02d %s", showName, nextSeasonNo, nextEpisodeNo, fallbackTorrentQuality);
                     }
                     if (tries == 2) {
-                        torrentQuality = "1080p"; nextSeasonNo++; nextEpisodeNo = 1;
-                        phrase = String.format("%s S%02dE%02d %s", showName, nextSeasonNo, nextEpisodeNo, torrentQuality);
+                        nextSeasonNo++; nextEpisodeNo = 1;
+                        phrase = String.format("%s S%02dE%02d %s", showName, nextSeasonNo, nextEpisodeNo, defaultTorrentQuality);
                     }
                     if (tries == 4) {
-                        torrentQuality = "1080p"; 
-                        phrase = String.format("%s S%02d %s\n", showName, nextSeasonNo, torrentQuality);
+                        phrase = String.format("%s S%02d %s\n", showName, nextSeasonNo, defaultTorrentQuality);
                     }
-                    if (tries == 5) break;
+                    if (tries == 5) {
+                        phrase = String.format("%s S%02d %s\n", showName, nextSeasonNo, fallbackTorrentQuality);
+                    }
+                    if (tries == 6) break;
                     tries++;
                     searchResult = torrent.search(phrase);
                 }
@@ -81,7 +83,7 @@ public class Main
                 if (searchResult == null) {
                     System.out.format("[*] No new episodes for %s\n", showName);
                 } else {
-                    System.out.format("[+] %s S%02dE%02d %s was found. Downloading...\n",showName, nextSeasonNo, nextEpisodeNo, torrentQuality);
+                    System.out.format("[+] %s S%02dE%02d was found. Downloading...\n",showName, nextSeasonNo, nextEpisodeNo);
                     torrent.download(lastSeason, searchResult);
                 }
             }
