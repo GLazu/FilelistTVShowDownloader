@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=TVShow
+comment0.text=\r\n\ This\ class\ searches\ for\ the\ latest\ tv\ episodes\ and\ downloads\ them\r\n\r\n\ @author\ Lazu\ George\ Mihai\r\n\ @version\ 0.2\r\n
+comment1.params=show
+comment1.target=TVShow(java.io.File)
+comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ TVShow\r\n
+comment2.params=
+comment2.target=java.lang.String\ getLastSeason()
+comment2.text=\r\n\ Fetches\ the\ last\ season\ of\ this\ TV\ Show\r\n\r\n\ @return\ \ \ \ the\ latest\ season's\ episode\ list\ as\ a\ File[]\ object\r\n
+comment3.params=lastSeasonPath
+comment3.target=java.lang.String\ getLastEpisode(java.lang.String)
+comment3.text=\r\n\ Fetches\ the\ last\ episode\ of\ this\ TV\ Show\r\n\r\n\ @param\ \ \ lastSeason\ a\ string\ containing\ the\ last\ season's\ path\r\n\ @return\ \ \ \ the\ latest\ episode\ path\r\n
+numComments=4

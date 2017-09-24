@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=Torrent
+comment0.text=\r\n\ This\ class\ will\ create\ Torrent\ objects\ which\ will\ search\ for\ and\ download\ a\ said\ TV\ Show\r\n\r\n\ @author\ Lazu\ George\ Mihai\r\n\ @version\ 0.2\r\n
+comment1.params=
+comment1.target=void\ connect()
+comment2.params=phrase
+comment2.target=java.lang.String\ search(java.lang.String)
+comment2.text=\r\n\ Search\ filelist.ro\ for\ the\ phrase\r\n\r\n\ @param\ \ \ phrase\ formatted\ torrent\ name\ for\ search\r\n\ @return\ \ \ \ the\ torrent\ id\r\n
+comment3.params=path\ torrentID
+comment3.target=void\ download(java.lang.String,\ java.lang.String)
+comment3.text=\r\n\ Search\ filelist.ro\ for\ the\ phrase\r\n\r\n\ @param\ \ \ path\ the\ path\ where\ the\ torrent\ will\ be\ downloaded\r\n\ @param\ \ \ torrentID\ the\ torrent's\ id\r\n\ @return\ \ \ \ the\ torrent\ id\r\n
+numComments=4

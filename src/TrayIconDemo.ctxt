@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=TrayIconDemo
+comment1.params=notifTitle\ notifMsg
+comment1.target=void\ displayTray(java.lang.String,\ java.lang.String)
+numComments=2
