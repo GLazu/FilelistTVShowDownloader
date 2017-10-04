@@ -70,10 +70,11 @@ public class Main
                         phrase = String.format("%s S%02dE%02d %s", showName, nextSeasonNo, nextEpisodeNo, defaultTorrentQuality);
                     }
                     if (tries == 4) {
-                        phrase = String.format("%s S%02d %s\n", showName, nextSeasonNo, defaultTorrentQuality);
+                        lastSeason = show.toString();
+                        phrase = String.format("%s S%02d %s", showName, nextSeasonNo, defaultTorrentQuality);
                     }
                     if (tries == 5) {
-                        phrase = String.format("%s S%02d %s\n", showName, nextSeasonNo, fallbackTorrentQuality);
+                        phrase = String.format("%s S%02d %s", showName, nextSeasonNo, fallbackTorrentQuality);
                     }
                     if (tries == 6) break;
                     tries++;
@@ -83,8 +84,14 @@ public class Main
                 if (searchResult == null) {
                     System.out.format("[*] No new episodes for %s\n", showName);
                 } else {
-                    System.out.format("[+] %s S%02dE%02d was found. Downloading...\n",showName, nextSeasonNo, nextEpisodeNo);
-                    torrent.download(lastSeason, searchResult);
+                    if (tries - 1 == 2) {
+                        String newSeasonFolder = String.format("%s\\%s S%02d", show.toString(), showName, nextSeasonNo);
+                        File file = new File(newSeasonFolder);
+                        file.mkdir();
+                        lastSeason = newSeasonFolder;
+                    }
+                    System.out.format("[+] %s was found. Downloading...\n",phrase);
+                    try { torrent.download(lastSeason, searchResult); } catch(java.lang.InterruptedException e) { };
                 }
             }
         }

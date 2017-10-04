@@ -60,7 +60,7 @@ public class Torrent
      * @param   torrentID the torrent's id
      * @return    the torrent id
      */
-    public void download(String path, String torrentID)
+    public void download(String path, String torrentID) throws java.lang.InterruptedException
     {
       String downloadURL = "http://filelist.ro/download.php?id=" + torrentID;
       String downloadLocation = TEMP_DOWNLOAD_LOC + "\\" + torrentID + ".torrent";
@@ -69,7 +69,9 @@ public class Torrent
           userAgent.download(downloadURL, file);
           String command = "deluge-console add -p '" + path + "' '" + downloadLocation + "'";
           try {
-              Process child = Runtime.getRuntime().exec(command);
+            Process child = Runtime.getRuntime().exec(command);
+            Thread.sleep(5000);
+            file.delete();
             try {
                 String notifMsg = String.format("%s is now downloading", phrase);
                 notify.displayTray("Torrent Downloader", notifMsg);
